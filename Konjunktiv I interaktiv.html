@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Konjunktiv I: interaktiv erklärt</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f6f8;--surf:#fff;--ink:#14232e;--mute:#5a6b77;--line:#d3dde4;--acc:#0b6e99;--acc2:#e0f0f7;--hi:#ffd84d;--ok:#1b7f4b;--okbg:#e3f5ea;--bad:#b3261e;--badbg:#fbe9e7;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e171d;--surf:#16242d;--ink:#e8f0f4;--mute:#9bb0bc;--line:#2b3f4b;--acc:#58b8e0;--acc2:#183645;--hi:#8a6d00;--ok:#6fd49b;--okbg:#17352a;--bad:#ff8a80;--badbg:#3b1f1d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e171d;--surf:#16242d;--ink:#e8f0f4;--mute:#9bb0bc;--line:#2b3f4b;--acc:#58b8e0;--acc2:#183645;--hi:#8a6d00;--ok:#6fd49b;--okbg:#17352a;--bad:#ff8a80;--badbg:#3b1f1d;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Source Serif 4",Georgia,serif}
+.wrap{max-width:760px;margin:0 auto;padding:24px 18px 60px}
+h1{font:800 clamp(30px,6vw,46px)/1.05 "Bricolage Grotesque",system-ui,sans-serif;margin:8px 0 6px;letter-spacing:-.02em}
+h2{font:600 22px/1.2 "Bricolage Grotesque",system-ui,sans-serif;margin:0 0 10px}
+.sub{color:var(--mute);margin:0 0 22px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.tabs button{font:600 15px "Bricolage Grotesque",system-ui,sans-serif;padding:9px 16px;border:1.5px solid var(--line);background:var(--surf);color:var(--ink);border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--acc);border-color:var(--acc);color:#fff}
+button:focus-visible,select:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.panel{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:22px}
+.panel[hidden]{display:none}
+.mark{background:linear-gradient(transparent 55%,var(--hi) 55%);padding:0 2px}
+.rule{border-left:4px solid var(--acc);background:var(--acc2);padding:10px 14px;margin:14px 0;border-radius:0 8px 8px 0}
+table{border-collapse:collapse;width:100%;font-family:"Bricolage Grotesque",system-ui,sans-serif}
+th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line)}
+th{color:var(--mute);font-weight:600;font-size:14px}
+td.same{background:var(--badbg);color:var(--bad)}
+td.k1{font-weight:800}
+.tw{overflow-x:auto}
+select{font:600 16px "Bricolage Grotesque",system-ui,sans-serif;padding:8px 12px;border-radius:8px;border:1.5px solid var(--line);background:var(--surf);color:var(--ink)}
+.note{color:var(--mute);font-size:15px;margin-top:12px}
+.ex{border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:12px}
+.ex .q{font-weight:600}
+.ex button,.nav button{font:600 15px "Bricolage Grotesque",system-ui,sans-serif;margin-top:10px;padding:8px 14px;border-radius:8px;border:1.5px solid var(--acc);background:transparent;color:var(--acc);cursor:pointer}
+.ans{margin-top:10px;padding:10px 14px;background:var(--okbg);border-radius:8px}
+.ans[hidden]{display:none}
+.steps{margin:6px 0 0;padding-left:20px;color:var(--mute);font-size:15px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:14px 0}
+.opts button{font:600 17px "Bricolage Grotesque",system-ui,sans-serif;padding:12px;border-radius:10px;border:1.5px solid var(--line);background:var(--surf);color:var(--ink);cursor:pointer}
+.opts button.right{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.opts button.wrong{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+.fb{min-height:48px}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin-bottom:14px}
+.bar i{display:block;height:100%;background:var(--acc);width:0;transition:width .3s}
+.score{font:800 40px "Bricolage Grotesque",system-ui,sans-serif}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Konjunktiv I</h1>
+<p class="sub">Die Form für „Er sagt, er sei krank.“ Verstehen, bilden, umformen, testen.</p>
+
+<div class="tabs" role="tablist">
+<button role="tab" aria-selected="true" data-t="p1">1 Verstehen</button>
+<button role="tab" aria-selected="false" data-t="p2">2 Formen bilden</button>
+<button role="tab" aria-selected="false" data-t="p3">3 Umformen</button>
+<button role="tab" aria-selected="false" data-t="p4">4 Quiz</button>
+</div>
+
+<section class="panel" id="p1">
+<h2>Wozu braucht man den Konjunktiv I?</h2>
+<p>Man benutzt ihn vor allem in der <span class="mark">indirekten Rede</span>: Man berichtet, was eine andere Person gesagt hat, ohne zu sagen, ob es stimmt. Das findet man oft in Zeitungen, Nachrichten und Berichten.</p>
+<div class="ex"><div class="q">Direkte Rede</div>Der Minister sagt: „Ich habe keine Zeit.“</div>
+<div class="ex"><div class="q">Indirekte Rede</div>Der Minister sagt, er <span class="mark">habe</span> keine Zeit.</div>
+<h2>So bildet man ihn</h2>
+<div class="rule"><b>Infinitiv-Stamm + Endung</b><br>ich -e · du -est · er/sie/es -e · wir -en · ihr -et · sie/Sie -en<br>Beispiel: <i>kommen</i> → er <b>komme</b>, du <b>kommest</b></div>
+<div class="rule"><b>Sonderfall sein:</b> ich <b>sei</b>, du seiest, er <b>sei</b>, wir <b>seien</b>, ihr seiet, sie <b>seien</b></div>
+<h2>Wichtigste Regel</h2>
+<div class="rule">Ist die Konjunktiv-I-Form gleich wie die Indikativ-Form (z. B. <i>sie haben</i>), dann nimmt man den <b>Konjunktiv II</b>: <i>Sie sagen, sie <b>hätten</b> Zeit.</i></div>
+<h2>Vergangenheit</h2>
+<div class="rule"><b>sei / habe + Partizip II</b><br>Er sagt, er <b>sei</b> in Berlin <b>gewesen</b>. · Sie sagt, sie <b>habe</b> nichts <b>gesehen</b>.</div>
+<p class="note">Die Zeit des Verbs in der direkten Rede ändert nicht die Zeitform im Konjunktiv I. Gegenwart und Zukunft werden meist mit der Gegenwartsform ausgedrückt.</p>
+</section>
+
+<section class="panel" id="p2" hidden>
+<h2>Formen bilden</h2>
+<p>Wähle ein Verb. Rot markierte Formen sind gleich wie im Indikativ. Dort benutzt man stattdessen den Konjunktiv II.</p>
+<label>Verb: <select id="verb"></select></label>
+<div class="tw" style="margin-top:14px"><table>
+<thead><tr><th>Person</th><th>Indikativ</th><th>Konjunktiv I</th><th>Ersatz (Konj. II)</th></tr></thead>
+<tbody id="tb"></tbody></table></div>
+<p class="note" id="vnote"></p>
+</section>
+
+<section class="panel" id="p3" hidden>
+<h2>Von direkter zu indirekter Rede</h2>
+<p>Überlege zuerst selbst. Dann klicke auf „Lösung zeigen“.</p>
+<div id="ex"></div>
+</section>
+
+<section class="panel" id="p4" hidden>
+<div class="bar"><i id="bar"></i></div>
+<div id="quiz"></div>
+</section>
+</div>
+
+<script>
+var P=["ich","du","er/sie/es","wir","ihr","sie/Sie"];
+var V={
+sagen:{i:["sage","sagst","sagt","sagen","sagt","sagen"],k1:["sage","sagest","sage","sagen","saget","sagen"],k2:["würde sagen","würdest sagen","würde sagen","würden sagen","würdet sagen","würden sagen"]},
+kommen:{i:["komme","kommst","kommt","kommen","kommt","kommen"],k1:["komme","kommest","komme","kommen","kommet","kommen"],k2:["käme","kämest","käme","kämen","kämet","kämen"]},
+haben:{i:["habe","hast","hat","haben","habt","haben"],k1:["habe","habest","habe","haben","habet","haben"],k2:["hätte","hättest","hätte","hätten","hättet","hätten"]},
+sein:{i:["bin","bist","ist","sind","seid","sind"],k1:["sei","seiest","sei","seien","seiet","seien"],k2:["wäre","wärst","wäre","wären","wärt","wären"]},
+werden:{i:["werde","wirst","wird","werden","werdet","werden"],k1:["werde","werdest","werde","werden","werdet","werden"],k2:["würde","würdest","würde","würden","würdet","würden"]},
+können:{i:["kann","kannst","kann","können","könnt","können"],k1:["könne","könnest","könne","können","könnet","können"],k2:["könnte","könntest","könnte","könnten","könntet","könnten"]},
+müssen:{i:["muss","musst","muss","müssen","müsst","müssen"],k1:["müsse","müssest","müsse","müssen","müsset","müssen"],k2:["müsste","müsstest","müsste","müssten","müsstet","müssten"]},
+wissen:{i:["weiß","weißt","weiß","wissen","wisst","wissen"],k1:["wisse","wissest","wisse","wissen","wisset","wissen"],k2:["wüsste","wüsstest","wüsste","wüssten","wüsstet","wüssten"]},
+gehen:{i:["gehe","gehst","geht","gehen","geht","gehen"],k1:["gehe","gehest","gehe","gehen","gehet","gehen"],k2:["ginge","gingest","ginge","gingen","ginget","gingen"]},
+fahren:{i:["fahre","fährst","fährt","fahren","fahrt","fahren"],k1:["fahre","fahrest","fahre","fahren","fahret","fahren"],k2:["führe","führest","führe","führen","führet","führen"]}
+};
+var $=function(s){return document.querySelector(s)};
+document.querySelectorAll(".tabs button").forEach(function(b){b.onclick=function(){
+document.querySelectorAll(".tabs button").forEach(function(x){x.setAttribute("aria-selected",x===b)});
+["p1","p2","p3","p4"].forEach(function(id){$("#"+id).hidden=id!==b.dataset.t});}});
+
+var sel=$("#verb");
+Object.keys(V).forEach(function(k){var o=document.createElement("option");o.textContent=k;sel.appendChild(o)});
+function render(){var v=V[sel.value],h="",n=0;
+for(var j=0;j<6;j++){var same=v.i[j]===v.k1[j];if(same)n++;
+h+="<tr><td>"+P[j]+"</td><td>"+v.i[j]+"</td><td class='k1 "+(same?"same":"")+"'>"+v.k1[j]+"</td><td>"+(same?"<b>"+v.k2[j]+"</b>":"–")+"</td></tr>";}
+$("#tb").innerHTML=h;
+$("#vnote").textContent=n+" von 6 Formen sind gleich wie im Indikativ. Dort nimmt man die Konjunktiv-II-Form.";}
+sel.onchange=render;sel.value="haben";render();
+
+var E=[
+["Tom sagt: „Ich habe keine Zeit.“","Tom sagt, er habe keine Zeit.",["ich → er","haben → er habe (Konj. I)","Komma setzen, keine Anführungszeichen"]],
+["Die Lehrerin sagt: „Die Schüler sind müde.“","Die Lehrerin sagt, die Schüler seien müde.",["sind → seien (Konj. I von sein)","Wortstellung bleibt wie im Hauptsatz"]],
+["Anna fragt Tom: „Kommst du morgen?“","Anna fragt Tom, ob er morgen komme.",["Ja/Nein-Frage → ob","du → er","kommst → komme (Verb am Ende)"]],
+["Der Chef sagt: „Wir haben viel Arbeit.“","Der Chef sagt, sie hätten viel Arbeit.",["wir → sie","Konj. I „haben“ = Indikativ → Konj. II: hätten"]],
+["Maria sagt: „Ich muss gehen.“","Maria sagt, sie müsse gehen.",["ich → sie","muss → müsse (Konj. I)"]],
+["Der Zeuge sagt: „Ich habe nichts gesehen.“","Der Zeuge sagt, er habe nichts gesehen.",["ich → er","Perfekt: habe + Partizip II"]],
+["Peter fragt: „Wann fährst du nach Wien?“","Peter fragt, wann er nach Wien fahre.",["Fragewort bleibt (wann)","du → er","fährst → fahre"]]
+];
+var eh="";E.forEach(function(e,i){eh+="<div class='ex'><div class='q'>"+e[0]+"</div><button data-i='"+i+"'>Lösung zeigen</button><div class='ans' hidden><b>"+e[1]+"</b><ol class='steps'>"+e[2].map(function(s){return"<li>"+s+"</li>"}).join("")+"</ol></div></div>"});
+$("#ex").innerHTML=eh;
+document.querySelectorAll("#ex button").forEach(function(b){b.onclick=function(){var a=b.nextElementSibling;a.hidden=!a.hidden;b.textContent=a.hidden?"Lösung zeigen":"Lösung verbergen"}});
+
+var Q=[
+["Er sagt, er ___ krank.",["sei","ist","wäre","wird"],0,"„sei“ ist der Konjunktiv I von „sein“. „ist“ ist Indikativ."],
+["Sie sagt, sie ___ keine Zeit.",["hat","habe","haben","hatten"],1,"Konjunktiv I von „haben“ für er/sie: habe."],
+["Sie sagen, sie ___ müde.",["sind","sei","seien","wären"],2,"Für „sie“ (Plural) heißt die Form „seien“. „sind“ wäre Indikativ."],
+["Die Kinder sagen, sie ___ Hunger.",["haben","habe","hätten","hatten"],2,"„haben“ ist gleich wie der Indikativ. Deshalb benutzt man den Konjunktiv II: hätten."],
+["Der Politiker sagte, er ___ morgen kommen.",["kommt","komme","kam","kommen"],1,"Konjunktiv I: er komme. Die Zeit von „sagte“ ändert die Form nicht."],
+["Sie berichtet, er ___ in Berlin gewesen.",["ist","sei","war","wäre"],1,"Vergangenheit im Konjunktiv I: sei/habe + Partizip II."],
+["Der Zeuge sagte, er ___ nichts gesehen.",["hat","habe","hätte","haben"],1,"Konjunktiv I Perfekt: habe + gesehen."],
+["Der Chef meint, wir ___ mehr arbeiten.",["müssen","müsse","müssten","musste"],2,"„wir müssen“ = Indikativ. Also Konjunktiv II: müssten."]
+];
+var qi=0,sc=0;
+function show(){
+$("#bar").style.width=(qi/Q.length*100)+"%";
+if(qi>=Q.length){$("#quiz").innerHTML="<div class='score'>"+sc+" / "+Q.length+"</div><p>"+(sc>=7?"Sehr gut! Du beherrschst die Grundregeln.":sc>=5?"Gut. Schau dir die Tabelle im Tab „Formen bilden“ noch einmal an.":"Lies Tab 1 noch einmal und probiere dann das Quiz erneut.")+"</p><div class='nav'><button id='again'>Quiz neu starten</button></div>";
+$("#again").onclick=function(){qi=0;sc=0;show()};return}
+var q=Q[qi],h="<p class='note'>Frage "+(qi+1)+" von "+Q.length+"</p><h2>"+q[0]+"</h2><div class='opts'>";
+q[1].forEach(function(o,i){h+="<button data-i='"+i+"'>"+o+"</button>"});
+h+="</div><div class='fb' id='fb'></div><div class='nav'></div>";
+$("#quiz").innerHTML=h;
+var done=false;
+document.querySelectorAll("#quiz .opts button").forEach(function(b){b.onclick=function(){
+if(done)return;done=true;var i=+b.dataset.i,bs=document.querySelectorAll("#quiz .opts button");
+bs[q[2]].classList.add("right");
+if(i===q[2]){sc++;$("#fb").innerHTML="<b>Richtig.</b> "+q[3]}else{b.classList.add("wrong");$("#fb").innerHTML="<b>Nicht ganz.</b> "+q[3]}
+var n=document.createElement("button");n.textContent=qi+1<Q.length?"Nächste Frage":"Ergebnis zeigen";
+n.onclick=function(){qi++;show()};document.querySelector("#quiz .nav").appendChild(n);n.focus();}});}
+show();
+</script>
+</body>
+</html>
